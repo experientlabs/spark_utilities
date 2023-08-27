@@ -27,4 +27,4 @@ val table = "my_table_name"
 val backupDF = spark.read.orc(s"gs://my_schema_name/my_table_name")
 val reOrderedOutputDFbk = reOrderAndPartitionBy(sortByColumnNames(backupDF), partitionKey)
 
-reOrderedOutputDFbk.write.mode(SaveMode.Overwrite).partitionBy(partKey: _*).format("orc").saveAsTable("my_schema_name.my_table_name")
+reOrderedOutputDFbk.write.mode(SaveMode.Overwrite).partitionBy(partKey: _*).format("orc").saveAsTable("my_schema_name.my_table_name_26082023")
