@@ -28,3 +28,21 @@ val backupDF = spark.read.orc(s"gs://my_schema_name/my_table_name")
 val reOrderedOutputDFbk = reOrderAndPartitionBy(sortByColumnNames(backupDF), partitionKey)
 
 reOrderedOutputDFbk.write.mode(SaveMode.Overwrite).partitionBy(partKey: _*).format("orc").saveAsTable("my_schema_name.my_table_name_26082023")
+
+#------------------------------------------------------------
+val df = spark.read.orc(s"gs://${schema}/${table}_26082023")
+
+def updatedColumn(df: Dataframe) = {
+df
+.withColumn("last_update_ts", when(col("last_update_ts").isNull, lit(current_timestamp())))
+.withColumn("col1_null_removal", when(col("col1_null_removal").isNull, lit(" ")))
+.withColumn("col2_null_removal", when(col("col2_null_removal").isNull, lit(" ")))
+.withColumn("col3_null_removal", when(col("col3_null_removal").isNull, lit(" ")))
+.withColumn("col4_null_removal", when(col("col4_null_removal").isNull, lit(" ")))
+}
+
+val df1=updatedColumn(df)
+
+val finalDF = reOrderAndPartitionBy(sortByColumnNames(df1), partitionKey)
+spark.sql("drop table my_schema_name.my_table_name")
+finalDF.write.mode(saveMode.Overwrite).partitionby(partKey: _*).format("orc").saveAsTable("my_schema_name.my_table_name")
