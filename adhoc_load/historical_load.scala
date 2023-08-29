@@ -45,4 +45,4 @@ val df1=updatedColumn(df)
 
 val finalDF = reOrderAndPartitionBy(sortByColumnNames(df1), partitionKey)
 spark.sql("drop table my_schema_name.my_table_name")
-finalDF.write.mode(saveMode.Overwrite).partitionby(partKey: _*).format("orc").saveAsTable("my_schema_name.my_table_name")
+finalDF.write.mode(saveMode.Overwrite).partitionBy(partKey: _*).format("orc").saveAsTable("my_schema_name.my_table_name")
