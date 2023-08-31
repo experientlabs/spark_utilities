@@ -1,0 +1,6 @@
+
+
+
+spark-shell --master yarn --conf spark.executor.memoryOverhead=12000 --conf spark.executor.cores=8 --num-executors 500 --conf spark.dynamicAllocaiton.enabled=true --conf spark.driver.memory=16G --conf spark.shuffle.service.enabled=true --executor-memory 50G --package com.google.cloud.spark:spark-bigquery-with-dependencies_2.11.0.18.0
+
+
