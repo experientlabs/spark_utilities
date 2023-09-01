@@ -6,3 +6,10 @@ For example:
 - Script to Load to a Big Query Table
 - Script to Load data to a Elastic Search
 
+
+
+
+
+```bash
+sed -i -e 's/\r$//' scriptname.sh
+```
